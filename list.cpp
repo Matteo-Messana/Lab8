@@ -127,4 +127,3 @@ void FlowList::copy(const FlowList& source)
     }
 
 }
-
