@@ -20,9 +20,19 @@ class FlowList {
 	
 	public:
 		FlowList(); //default constructor
-		FlowList(const &FlowList itemA);
+		FlowList(const &FlowList itemA); //copy constructor
+		FlowList& operator =(const FlowList&rhs) //overloaded assignment operator
+		~FlowListI(); //destructor
+		
+		void insert(const ListItem& itemA);
+		void remove(const ListItem& itemA);
+		Node* get_item()const;
 	
 	private:
+		Node *headM;
+		Node *cursor;
+		void destroy();
+		void copy(const FlowList&source);
 
 };
 
