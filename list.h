@@ -6,21 +6,21 @@
 
 struct ListItem
 {
-int year;
-double flow;
+	int year;
+	double flow;
 }
 
 struct Node
 {
-ListItem item;
-Node *next;
+	ListItem item;
+	Node *next;
 }
 
 class FlowList {
 	
 	public:
 		FlowList(); //default constructor
-		
+		FlowList(const &FlowList itemA);
 	
 	private:
 
