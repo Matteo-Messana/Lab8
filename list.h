@@ -4,6 +4,18 @@
 #ifndef LIST_H
 #define LIST_H
 
+struct ListItem
+{
+int year;
+double flow;
+}
+
+struct Node
+{
+ListItem item;
+Node *next;
+}
+
 class FlowList {
 	
 	public:
