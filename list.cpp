@@ -18,3 +18,20 @@ FlowList::FlowList(const FlowList& source)
 {
 	copy(source);
 }
+//don't go past line 45 o/w conflict
+
+FlowList& Flowlist::operator =(const FlowList& rhs)
+{
+	if(this != rhs)
+	{
+		destroy();
+		copy(rhs);
+	}
+	
+	return *this;
+}
+
+FlowList::~FlowList()
+{
+	destroy();
+}
