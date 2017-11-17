@@ -24,10 +24,6 @@ class FlowList {
 	
 	private:
 
-
-WAAWAWAWAWAWAWAWAWAW
-
-HEOLO
 };
 
 #endif
