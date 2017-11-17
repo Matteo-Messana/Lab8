@@ -18,28 +18,21 @@ FlowList::FlowList(const FlowList& source)
 {
 	copy(source);
 }
+FlowList& Flowlist::operator =(const FlowList& rhs)
+{
+	if(this != rhs)
+	{
+		destroy();
+		copy(rhs);
+	}
+	
+	return *this;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+FlowList::~FlowList()
+{
+	destroy();
+}
 
 FlowList::insert(const ListItem& itemA)
+

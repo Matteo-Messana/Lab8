@@ -26,7 +26,6 @@ class FlowList {
 		
 		void insert(const ListItem& itemA);
 		void remove(const ListItem& itemA);
-		//void print() const;
 		Node* get_item()const;
 	
 	private:
