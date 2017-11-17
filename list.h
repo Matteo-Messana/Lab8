@@ -23,8 +23,18 @@ class FlowList {
 		FlowList(const &FlowList itemA); //copy constructor
 		FlowList& operator =(const FlowList&rhs) //overloaded assignment operator
 		~FlowListI(); //destructor
+		
+		void insert(const ListItem& itemA);
+		void remove(const ListItem& itemA);
+		void print() const;
+		ListItem get_item()const;
+		void set_item(int year, double flow);
 	
 	private:
+		Node *headM;
+		Node *cursor;
+		void destroy();
+		void copy(const FlowList&source);
 
 };
 
