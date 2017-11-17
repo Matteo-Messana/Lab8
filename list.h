@@ -26,9 +26,8 @@ class FlowList {
 		
 		void insert(const ListItem& itemA);
 		void remove(const ListItem& itemA);
-		void print() const;
-		ListItem get_item()const;
-		void set_item(int year, double flow);
+		//void print() const;
+		Node* get_item()const;
 	
 	private:
 		Node *headM;
