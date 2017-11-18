@@ -8,21 +8,21 @@ struct ListItem
 {
 	int year;
 	double flow;
-}
+};
 
 struct Node
 {
 	ListItem item;
 	Node *next;
-}
+};
 
 class FlowList {
 	
 	public:
 		FlowList(); //default constructor
-		FlowList(const &FlowList itemA); //copy constructor
-		FlowList& operator =(const FlowList&rhs) //overloaded assignment operator
-		~FlowListI(); //destructor
+		FlowList(const FlowList& itemA); //copy constructor
+		FlowList& operator =(const FlowList&rhs); //overloaded assignment operator
+		~FlowList(); //destructor
 		
 		void insert(const ListItem& itemA);
 		void remove(const ListItem& itemA);

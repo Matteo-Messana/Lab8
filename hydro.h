@@ -5,12 +5,14 @@
 #define HYDRO_H
 
 void displayHeader();
-int readData(FlowList& list, ifstream& stream, char* filename);
+// int readData(FlowList& list);
 int menu();
-int display(const FlowList& list);
-void addData(FlowList& list);
-void removeData(FlowList& list);
-double average(const FlowList& list);
-double median(const FlowList& list);
-void saveData(const FlowList& list, ofstream& stream, char* filename);
+// int display(const FlowList& list);
+// void addData(FlowList& list);
+// void removeData(FlowList& list);
+// double average(const FlowList& list);
+// double median(const FlowList& list);
+// void saveData(const FlowList& list);
 void pressEnter();
+
+#endif
