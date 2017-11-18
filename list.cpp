@@ -113,24 +113,24 @@ void FlowList::destroy()
 // copy member function
 void FlowList::copy(const FlowList& source)
 {
-	Node* temp = source.headM;
+	cursor = source.headM;
     
     Node *headNode = new Node;
     this -> headM = headNode;
     headNode -> next = NULL;
-    headNode -> item = temp->item;
-    temp = temp -> next;
+    headNode -> item = cursor->item;
+    cursor = cursor -> next;
     
     Node* previous = headNode;
     
     while(temp != NULL)
     {
     	Node *copyNode = new Node;
-    	copyNode -> item = temp -> item;
+    	copyNode -> item = cursor -> item;
     	copyNode -> next = NULL;
     	previous -> next = copyNode; 
     	previous = copyNode;
-    	temp = temp -> next;
+    	cursor = cursor -> next;
     }
 
 }
