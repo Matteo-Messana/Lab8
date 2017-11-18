@@ -20,6 +20,8 @@ void displayHeader()
 
 int readData(FlowList& list)
 {
+	int year;
+	double flow;
 	ifstream stream;
 	stream.open("flow.txt");
 	if(stream.fail())
@@ -27,10 +29,11 @@ int readData(FlowList& list)
 		cerr<<"Could not open file."
 		exit(1);
 	}
-	for(int i =0;i<SIZE;i++)
+	while(!stream.eof())
 	{
-		stream<<i+1;
-		list.insert(stream);
+		stream >> year >> flow;
+		ListItem temp = {year, flow};
+		list.insert(temp);
 	}
-	
+	stream.close();
 }
