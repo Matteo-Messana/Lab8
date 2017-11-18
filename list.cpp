@@ -133,4 +133,3 @@ void FlowList::copy(const FlowList& source)
     	cursor = cursor -> next;
     }
 }
-
