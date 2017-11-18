@@ -19,6 +19,7 @@ FlowList::FlowList(const FlowList& source)
 	copy(source);
 }
 
+// assignment overide
 FlowList& Flowlist::operator =(const FlowList& rhs)
 {
 	if(this != rhs)
@@ -30,11 +31,13 @@ FlowList& Flowlist::operator =(const FlowList& rhs)
 	return *this;
 }
 
+// destructor
 FlowList::~FlowList()
 {
 	destroy();
 }
 
+// insert member function
 void FlowList::insert(const ListItem& itemA)
 {
 	Node *new_node = new Node;
@@ -55,6 +58,7 @@ void FlowList::insert(const ListItem& itemA)
         before->next = new_node;
 }
 
+// remove member function
 void FlowList::remove(const ListItem& itemA)
 {
     if (headM == 0 || itemA.flow < headM->item.flow)
@@ -81,11 +85,13 @@ void FlowList::remove(const ListItem& itemA)
     doomed_node = NULL;
 }
 
+// getter function
 Node* FlowList::get_item()const
 {
 	return headM;
 }
 
+// destroy member function
 void FlowList::destroy()
 {
 	Node* annihilate = headM;
@@ -104,26 +110,31 @@ void FlowList::destroy()
 
 }
 
+// copy member function
 void FlowList::copy(const FlowList& source)
 {
-	Node* temp = source.headM;
+	cursor = source.headM;
     
     Node *headNode = new Node;
     this -> headM = headNode;
     headNode -> next = NULL;
-    headNode -> item = temp->item;
-    temp = temp -> next;
+    headNode -> item = cursor->item;
+    cursor = cursor -> next;
     
     Node* previous = headNode;
     
     while(temp != NULL)
     {
     	Node *copyNode = new Node;
-    	copyNode -> item = temp -> item;
+    	copyNode -> item = cursor -> item;
     	copyNode -> next = NULL;
     	previous -> next = copyNode; 
     	previous = copyNode;
-    	temp = temp -> next;
+    	cursor = cursor -> next;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Matteo
