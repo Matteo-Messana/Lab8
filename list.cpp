@@ -132,5 +132,5 @@ void FlowList::copy(const FlowList& source)
     	previous = copyNode;
     	cursor = cursor -> next;
     }
-
 }
+
