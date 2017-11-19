@@ -74,21 +74,22 @@ int FlowList::remove(const ListItem& itemA)
     else {
         Node *before = headM;
         Node *maybe_doomed = headM->next;
-        while(maybe_doomed != 0 || itemA.year != maybe_doomed->item.year) {
+        
+        while(maybe_doomed != 0 && itemA.year != maybe_doomed->item.year) {
             before = maybe_doomed;
-            maybe_doomed = maybe_doomed->next;
-            if(maybe_doomed == NULL)
-            {
-            	return 0;
-            }   
+            maybe_doomed = maybe_doomed->next; 
         }
+        if(maybe_doomed == NULL)
+        {
+        	return 0;
+        }
+ 
         doomed_node = maybe_doomed;
         before->next = doomed_node -> next;
     }
 
     delete [] doomed_node;
     doomed_node = NULL;
-    
     return 1;
 }
 

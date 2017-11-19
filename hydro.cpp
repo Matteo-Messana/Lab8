@@ -15,33 +15,32 @@ int main(void)
 	int quit = 0;
 	displayHeader();
 	TotalRecords = readData(ListofLinks);
-	cout << TotalRecords << endl;
-	
 	
 	while(1)
 	{
 		switch(menu()){
 			case 1: 
-				cout << "User has chosen Option #1: Display flow list, average and median." << endl;
-				display(ListofLinks,TotalRecords);
-				pressEnter();
+				cout << "\nUser has chosen Option #1: Display flow list, average and median." << endl;
+				display(ListofLinks, TotalRecords);
+				//pressEnter();
 				break;
 			
 			case 2:
-				cout << "User has chosen Option #2: Add data" << endl;
-				addData(ListofLinks,TotalRecords);
-				pressEnter();
+				cout << "\nUser has chosen Option #2: Add data" << endl;
+				TotalRecords = addData(ListofLinks, TotalRecords);
+				//pressEnter();
 				break;
 				
 			case 3:
-				cout << "This is choice #3" << endl;
-				pressEnter();
+				cout << "\nUser has chosen Option #3: Save data" << endl;
+				saveData(ListofLinks);
+				//pressEnter();
 				break;
 				
 			case 4:
-				cout << "User has chosen Option #4: Remove Data" << endl;
-				removeData(ListofLinks, TotalRecords);
-				pressEnter();
+				cout << "\nUser has chosen Option #4: Remove Data" << endl;
+				TotalRecords = removeData(ListofLinks, TotalRecords);
+				//pressEnter();
 				break;
 				
 			case 5:
@@ -51,7 +50,8 @@ int main(void)
 			
 			default:
 				cout << "\nNot a valid input." << endl;
-				pressEnter();
+				//pressEnter();
+				break;
 		}				
 		if(quit == 1)
 			break;
@@ -101,7 +101,7 @@ void pressEnter()
 
 int menu()
 {
-	cout << "Please select one of the following operations:" << endl;
+	cout << "\nPlease select one of the following operations:" << endl;
 	cout << "1. Display flow list, average and median." << endl;
 	cout << "2. Add data." << endl;
 	cout << "3. Save data into the file." << endl;
@@ -126,9 +126,11 @@ int addData(FlowList& list, int size)
 	cin >> year >> flow;
 	ListItem temp = {year,flow};
 	list.insert(temp);
-	cout << "The data entered was succesfully added to the list." << endl;
-	return size++;
+	cout << "\nData was successfully added to the data set!" << endl;
+	return ++size;
+	
 }
+
 void display(const FlowList& list, int size)
 {
 	int year;
@@ -143,13 +145,17 @@ void display(const FlowList& list, int size)
 		cout << year << "		" << flow << endl;
 		cursorM = cursorM->next;
 	}
-	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;
-}
+
+	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;	
+	cout << "The number of records in this data set is:" << size << endl;
+	cout << "The median for the data set is:" << median(list, size) << endl;
+	cout << "The average for the data set is:" << average(list, size) << endl;
+	
 
 int removeData(FlowList& list, int size)
 {
 	int user_input;
-	cout << "Please enter the year that you want to remove:" << endl;
+	cout << "\nPlease enter the year that you want to remove:" << endl;
 	cin >> user_input;
 	
 	ListItem temp = {user_input};
@@ -157,18 +163,19 @@ int removeData(FlowList& list, int size)
 	
 	if(success == 1)
 	{
-		cout << "Target item removed" << endl;
-		return size--;
+		cout << "You successfully removed an item from the data set!" << endl;
+		return --size;
 	}
 	else
 	{
-		cout << "Not a valid target" << endl;
+		cout << "User input invalid. Target item could not be removed." << endl;
 		return size;
 	}
 }
 
 double average(const FlowList& list, int size)
 {
+
 	double average=0;
 	Node* cursorM = list.get_headM();
 	while(cursorM != NULL)
@@ -177,4 +184,50 @@ double average(const FlowList& list, int size)
 		cursorM=cursorM->next;
 	}
 	return average/size;	
+}
+
+double median(const FlowList& list, int size)
+{
+	Node* cursorM = list.get_headM();
+	
+	if(size%2 == 0)
+	{
+		int i = 1;
+		while(i <= size/2)
+		{
+			cursorM = cursorM->next;
+			i++;
+		}
+		return ((cursorM->item.flow + (cursorM->next)->item.flow)/2);
+	}
+	else
+	{
+		int j = 1;
+		while(j <= size/2)
+		{
+			cursorM = cursorM -> next;
+			j++;
+		}
+		return cursorM->item.flow;
+	}
+}
+
+void saveData(const FlowList& list)
+{
+	Node* cursorM = list.get_headM();
+	ofstream stream;
+	stream.open("flow.txt");
+	
+	if(stream.fail())
+	{
+		cerr << "Could not open file.";
+		exit(1);
+	}
+	while(cursorM != NULL)
+	{
+		stream << cursorM -> item.year << "		" << cursorM -> item.flow << endl;
+		cursorM = cursorM -> next;
+	}
+	stream.close();
+	cout << "The data set was successfully written into the file flow.txt!" << endl;
 }
