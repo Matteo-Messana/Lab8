@@ -67,7 +67,7 @@ int main(void)
 		if(cin.fail())
 		{
 			cin.clear();
-			cin.ignore();
+			cin.ignore(1000, '\n');
 		}
 	}
 }
@@ -132,7 +132,12 @@ int menu()
 	
 	double user_input;
 	cin >> user_input;
-	
+	if(cin.get() == ' ')
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		return 0;
+	}
 	if(user_input == (int)user_input)
 		return (int)user_input;	
 	else
@@ -147,6 +152,17 @@ int addData(FlowList& list, int size)
 	cout << "Please enter a year and a flow rate with a space seperating the values" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
 	cin >> year >> flow;
+	
+	if(cin.fail())
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cout << "\n----------------------------------------------" << endl;
+		cout << "Input invalid. Data could not be added to set." << endl;
+		cout << "----------------------------------------------" << endl;
+		return size;
+	}
+	
 	ListItem temp = {year,flow};
 	list.insert(temp);
 	
