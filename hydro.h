@@ -12,9 +12,9 @@ int menu();
 void display(const FlowList& list, int size);
 int addData(FlowList& list, int size);
 int removeData(FlowList& list, int size);
-// double average(const FlowList& list, int size);
+double average(const FlowList& list, int size);
 double median(const FlowList& list, int size);
-// void saveData(const FlowList& list);
+void saveData(const FlowList& list);
 void pressEnter();
 
 #endif
