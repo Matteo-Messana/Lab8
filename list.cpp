@@ -43,14 +43,17 @@ void FlowList::insert(const ListItem& itemA)
 	Node *new_node = new Node;
     new_node->item = itemA;
     
-    if (headM == 0 || itemA.flow <= headM->item.flow ) {
+    if (headM == 0 || itemA.flow <= headM->item.flow ) 
+	{
         new_node->next = headM;
         headM = new_node;
     }
-    else {
+    else 
+	{
         Node *before = headM;      
         Node *after = headM->next; 
-        while(after != 0 && itemA.flow > after->item.flow) {
+        while(after != 0 && itemA.flow > after->item.flow) 
+		{
             before = after;
             after = after->next;
         }
@@ -67,15 +70,18 @@ int FlowList::remove(const ListItem& itemA)
     
     Node *doomed_node = 0;
     
-    if ((itemA.year == headM->item.year)) {
+    if ((itemA.year == headM->item.year)) 
+	{
         doomed_node = headM;
         headM = headM->next;
     }
-    else {
+    else 
+	{
         Node *before = headM;
         Node *maybe_doomed = headM->next;
         
-        while(maybe_doomed != 0 && itemA.year != maybe_doomed->item.year) {
+        while(maybe_doomed != 0 && itemA.year != maybe_doomed->item.year) 
+		{
             before = maybe_doomed;
             maybe_doomed = maybe_doomed->next; 
         }

@@ -18,7 +18,8 @@ int main(void)
 	
 	while(1)
 	{
-		switch(menu()){
+		switch(menu())
+		{
 			case 1: 
 				cout << "\nUser has chosen Option #1: Display flow list, average and median." << endl;
 				display(ListofLinks, TotalRecords);
@@ -122,7 +123,7 @@ int addData(FlowList& list, int size)
 {
 	int year;
 	double flow;
-	cout << "Please enter a year and a flow rate" << endl;
+	cout << "Please enter a year and a flow rate with a space seperating the values" << endl;
 	cin >> year >> flow;
 	ListItem temp = {year,flow};
 	list.insert(temp);
@@ -145,12 +146,11 @@ void display(const FlowList& list, int size)
 		cout << year << "		" << flow << endl;
 		cursorM = cursorM->next;
 	}
-
-	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;	
 	cout << "The number of records in this data set is:" << size << endl;
+	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;	
 	cout << "The median for the data set is:" << median(list, size) << endl;
 	cout << "The average for the data set is:" << average(list, size) << endl;
-	
+}	
 
 int removeData(FlowList& list, int size)
 {
