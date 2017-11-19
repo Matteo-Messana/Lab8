@@ -23,12 +23,13 @@ int main(void)
 		switch(menu()){
 			case 1: 
 				cout << "User has chosen Option #1: Display flow list, average and median." << endl;
-				display(ListofLinks);
+				display(ListofLinks,TotalRecords);
 				pressEnter();
 				break;
 			
 			case 2:
-				cout << "This is choice #2" << endl;
+				cout << "User has chosen Option #2: Add data" << endl;
+				addData(ListofLinks,TotalRecords);
 				pressEnter();
 				break;
 				
@@ -125,9 +126,10 @@ int addData(FlowList& list, int size)
 	cin >> year >> flow;
 	ListItem temp = {year,flow};
 	list.insert(temp);
+	cout << "The data entered was succesfully added to the list." << endl;
 	return size++;
 }
-void display(const FlowList& list)
+void display(const FlowList& list, int size)
 {
 	int year;
 	double flow;
@@ -141,7 +143,7 @@ void display(const FlowList& list)
 		cout << year << "		" << flow << endl;
 		cursorM = cursorM->next;
 	}
-
+	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;
 }
 
 int removeData(FlowList& list, int size)
@@ -163,4 +165,16 @@ int removeData(FlowList& list, int size)
 		cout << "Not a valid target" << endl;
 		return size;
 	}
+}
+
+double average(const FlowList& list, int size)
+{
+	double average=0;
+	Node* cursorM = list.get_headM();
+	while(cursorM != NULL)
+	{
+		average+=cursorM->item.flow;
+		cursorM=cursorM->next;
+	}
+	return average/size;	
 }
