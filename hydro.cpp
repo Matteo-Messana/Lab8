@@ -73,7 +73,7 @@ int readData(FlowList& list)
 	stream.open("flow.txt");
 	if(stream.fail())
 	{
-		cerr<<"Could not open file."
+		cerr<<"Could not open file.";
 		exit(1);
 	}
 	while(!stream.eof())
@@ -108,4 +108,16 @@ int menu()
 		return (int)user_input;	
 	else
 		return 0;
+}
+
+int addData(FlowList& list, int size)
+{
+	int year;
+	double flow;
+	cout << "Please enter a year and a flow rate" << endl;
+	cin >> year >> flow;
+	ListItem temp = {year,flow};
+	list.insert(temp);
+	size++;	
+	return size;
 }
