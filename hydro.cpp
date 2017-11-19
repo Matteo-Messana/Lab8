@@ -118,6 +118,5 @@ int addData(FlowList& list, int size)
 	cin >> year >> flow;
 	ListItem temp = {year,flow};
 	list.insert(temp);
-	size++;	
-	return size;
+	return size++;
 }
