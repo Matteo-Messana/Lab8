@@ -7,22 +7,23 @@
 using namespace std;
 #include "hydro.h"
 #include "list.h"
-#define SIZE 15;
 
 int main(void)
 {
-	//FlowList ListofLinks;
-	//int TotalRecords;
+	FlowList ListofLinks;
+	int TotalRecords;
 	int quit = 0;
 	displayHeader();
-	//TotalRecords = readData(ListofLinks);
+	TotalRecords = readData(ListofLinks);
+	cout << TotalRecords << endl;
 	
 	
 	while(1)
 	{
 		switch(menu()){
 			case 1: 
-				cout << "This is choice #1" << endl;
+				cout << "User has chosen Option #1: Display flow list, average and median." << endl;
+				display(ListofLinks);
 				pressEnter();
 				break;
 			
@@ -37,7 +38,8 @@ int main(void)
 				break;
 				
 			case 4:
-				cout << "This is choice #4" << endl;
+				cout << "User has chosen Option #4: Remove Data" << endl;
+				removeData(ListofLinks, TotalRecords);
 				pressEnter();
 				break;
 				
@@ -67,6 +69,7 @@ void displayHeader()
 
 int readData(FlowList& list)
 {
+	int dataNum = 0;
 	int year;
 	double flow;
 	ifstream stream;
@@ -81,8 +84,12 @@ int readData(FlowList& list)
 		stream >> year >> flow;
 		ListItem temp = {year, flow};
 		list.insert(temp);
+		dataNum++;
 	}
 	stream.close();
+	cout << "Data from the file was successfully read" << endl;
+	
+	return dataNum;
 }
 
 void pressEnter()
@@ -119,4 +126,41 @@ int addData(FlowList& list, int size)
 	ListItem temp = {year,flow};
 	list.insert(temp);
 	return size++;
+}
+void display(const FlowList& list)
+{
+	int year;
+	double flow;
+	Node* cursorM = list.get_headM();
+	
+	cout << "YEAR		FLOW (in billions of cubic meters)" << endl;
+	while(cursorM != NULL)
+	{
+		year = cursorM->item.year;
+		flow = cursorM->item.flow;
+		cout << year << "		" << flow << endl;
+		cursorM = cursorM->next;
+	}
+
+}
+
+int removeData(FlowList& list, int size)
+{
+	int user_input;
+	cout << "Please enter the year that you want to remove:" << endl;
+	cin >> user_input;
+	
+	ListItem temp = {user_input};
+	int success = list.remove(temp);
+	
+	if(success == 1)
+	{
+		cout << "Target item removed" << endl;
+		return size--;
+	}
+	else
+	{
+		cout << "Not a valid target" << endl;
+		return size;
+	}
 }

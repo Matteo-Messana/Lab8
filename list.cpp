@@ -20,9 +20,9 @@ FlowList::FlowList(const FlowList& source)
 }
 
 // assignment overide
-FlowList& Flowlist::operator =(const FlowList& rhs)
+FlowList& FlowList::operator =(const FlowList& rhs)
 {
-	if(this != rhs)
+	if(this != &rhs)
 	{
 		destroy();
 		copy(rhs);
@@ -56,26 +56,31 @@ void FlowList::insert(const ListItem& itemA)
         }
         new_node->next = after;
         before->next = new_node;
+     }
 }
 
 // remove member function
-void FlowList::remove(const ListItem& itemA)
+int FlowList::remove(const ListItem& itemA)
 {
-    if (headM == 0 || itemA.flow < headM->item.flow)
-        return;
+    if (headM == 0)
+        return 0;
     
     Node *doomed_node = 0;
     
-    if (itemA == headM->item) {
+    if ((itemA.year == headM->item.year)) {
         doomed_node = headM;
         headM = headM->next;
     }
     else {
         Node *before = headM;
         Node *maybe_doomed = headM->next;
-        while(maybe_doomed != 0 && itemA.flow > maybe_doomed->item.flow) {
+        while(maybe_doomed != 0 || itemA.year != maybe_doomed->item.year) {
             before = maybe_doomed;
             maybe_doomed = maybe_doomed->next;
+            if(maybe_doomed == NULL)
+            {
+            	return 0;
+            }   
         }
         doomed_node = maybe_doomed;
         before->next = doomed_node -> next;
@@ -83,10 +88,11 @@ void FlowList::remove(const ListItem& itemA)
 
     delete [] doomed_node;
     doomed_node = NULL;
+    
+    return 1;
 }
 
-// getter function
-Node* FlowList::get_item()const
+Node* FlowList::get_headM()const
 {
 	return headM;
 }
@@ -123,7 +129,7 @@ void FlowList::copy(const FlowList& source)
     
     Node* previous = headNode;
     
-    while(temp != NULL)
+    while(cursor != NULL)
     {
     	Node *copyNode = new Node;
     	copyNode -> item = cursor -> item;

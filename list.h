@@ -25,8 +25,8 @@ class FlowList {
 		~FlowList(); //destructor
 		
 		void insert(const ListItem& itemA);
-		void remove(const ListItem& itemA);
-		Node* get_item()const;
+		int remove(const ListItem& itemA);
+		Node* get_headM()const;
 	
 	private:
 		Node *headM;
