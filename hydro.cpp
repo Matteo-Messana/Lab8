@@ -15,20 +15,19 @@ int main(void)
 	int quit = 0;
 	displayHeader();
 	TotalRecords = readData(ListofLinks);
-	cout << TotalRecords << endl;
-	
 	
 	while(1)
 	{
 		switch(menu()){
 			case 1: 
 				cout << "User has chosen Option #1: Display flow list, average and median." << endl;
-				display(ListofLinks);
+				display(ListofLinks, TotalRecords);
 				pressEnter();
 				break;
 			
 			case 2:
-				cout << "This is choice #2" << endl;
+				cout << "User has chosen Option #2: Add data" << endl;
+				TotalRecords = addData(ListofLinks, TotalRecords);
 				pressEnter();
 				break;
 				
@@ -39,7 +38,7 @@ int main(void)
 				
 			case 4:
 				cout << "User has chosen Option #4: Remove Data" << endl;
-				removeData(ListofLinks, TotalRecords);
+				TotalRecords = removeData(ListofLinks, TotalRecords);
 				pressEnter();
 				break;
 				
@@ -51,6 +50,7 @@ int main(void)
 			default:
 				cout << "\nNot a valid input." << endl;
 				pressEnter();
+				break;
 		}				
 		if(quit == 1)
 			break;
@@ -125,9 +125,10 @@ int addData(FlowList& list, int size)
 	cin >> year >> flow;
 	ListItem temp = {year,flow};
 	list.insert(temp);
-	return size++;
+	return ++size;
 }
-void display(const FlowList& list)
+
+void display(const FlowList& list, int size)
 {
 	int year;
 	double flow;
@@ -141,7 +142,10 @@ void display(const FlowList& list)
 		cout << year << "		" << flow << endl;
 		cursorM = cursorM->next;
 	}
-
+	
+	cout << "The number of records in this data set is:" << size << endl;
+	cout << "The median for the data set is:" << median(list, size) << endl;
+	
 }
 
 int removeData(FlowList& list, int size)
@@ -155,12 +159,42 @@ int removeData(FlowList& list, int size)
 	
 	if(success == 1)
 	{
-		cout << "Target item removed" << endl;
-		return size--;
+		cout << "successful removal" << endl;
+		return --size;
 	}
 	else
 	{
-		cout << "Not a valid target" << endl;
+		cout << "unsuccessful removal" << endl;
 		return size;
 	}
 }
+
+double median(const FlowList& list, int size)
+{
+	Node* cursorM = list.get_headM();
+	
+	if(size%2 == 0)
+	{
+		int i = 1;
+		while(i <= size/2)
+		{
+			cursorM = cursorM->next;
+			i++;
+		}
+		return ((cursorM->item.flow + (cursorM->next)->item.flow)/2);
+	}
+	else
+	{
+		int j = 1;
+		while(j <= size/2)
+		{
+			cursorM = cursorM -> next;
+			j++;
+		}
+		return cursorM->item.flow;
+	}
+}
+	
+
+
+
