@@ -13,12 +13,6 @@ FlowList::FlowList()
 	cursor = NULL;
 }
 
-// constructor
-FlowList::FlowList(const FlowList& source)
-{
-	copy(source);
-}
-
 // assignment overide
 FlowList& FlowList::operator =(const FlowList& rhs)
 {

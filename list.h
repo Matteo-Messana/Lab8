@@ -20,7 +20,6 @@ class FlowList {
 	
 	public:
 		FlowList(); //default constructor
-		FlowList(const FlowList& itemA); //copy constructor
 		FlowList& operator =(const FlowList&rhs); //overloaded assignment operator
 		~FlowList(); //destructor
 		
