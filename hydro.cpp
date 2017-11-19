@@ -51,11 +51,17 @@ int main(void)
 			
 			default:
 				cout << "\nNot a valid input." << endl;
+				
 				//pressEnter();
 				break;
 		}				
 		if(quit == 1)
 			break;
+		if(cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+		}
 	}
 }
 
@@ -146,8 +152,7 @@ void display(const FlowList& list, int size)
 		cout << year << "		" << flow << endl;
 		cursorM = cursorM->next;
 	}
-	cout << "The number of records in this data set is:" << size << endl;
-	cout << "The average of all of the flow rates in the list is:" << average(list,size) << endl;	
+	cout << "The number of records in this data set is:" << size << endl;	
 	cout << "The median for the data set is:" << median(list, size) << endl;
 	cout << "The average for the data set is:" << average(list, size) << endl;
 }	
