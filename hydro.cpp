@@ -149,9 +149,13 @@ int addData(FlowList& list, int size)
 	int year;
 	double flow;
 	cout << "\n----------------------------------------------------------------------" << endl;
-	cout << "Please enter a year and a flow rate with a space seperating the values" << endl;
+	cout << "Please enter a year" << endl;
 	cout << "----------------------------------------------------------------------" << endl;
-	cin >> year >> flow;
+	cin >> year;
+	cout << "\n----------------------------------------------------------------------" << endl;
+	cout << "Please enter a flow rate" << endl;
+	cout << "----------------------------------------------------------------------" << endl;
+	cin >> flow;
 	
 	if(cin.fail())
 	{
